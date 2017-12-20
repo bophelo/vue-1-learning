@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <div id="app">
+            <form>
+                <span class="error" v-show="!message"><!--displays or hides an element using css-->
+                    You must enter a message<!--v-if conditionally loads something based upon expression-->
+                </span><!--only display message if the textarea's value is empty-->
+                
+                <textarea v-model="message"></textarea><!--bind textarea, since we wanna compare it against its value-->
+
+                <button type="submit" v-show="message"><!-- only display if there is a message, if message is not a false value-->
+                    Send Message
+                </button>
+
+                <pre>
+                    {{ $data | json }} <!--pass through data object and prepare it as json-->
+                </pre>
+
+            </form>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.1/vue.min.js"></script>
+        <script>
+            //For any properties on the data model, initialise them even if they are set to empty strings
+            new Vue({
+                el: '#app',
+                data: {
+                    message: ''
+                }
+            })
+        </script>
+    </body>
+</html>
