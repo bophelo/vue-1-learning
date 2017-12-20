@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div id="app">
+        <!--scenario: multiple counters, cannot duplicate because count is still 
+            bound to the same value-->
+        <!--rule: if you find yourself in a situation where a piece of functionality
+                        or behaviour is repeated, create a dedicated component-->
+        <counter heading="Likes"></counter><!--each of these can have unique data applied to them-->
+        <counter heading="Dislikes"></counter><!--have to explicit about the properties a component accepts-->
+    </div>
+
+    <template id="counter-template">
+        <h1>{{ heading }}</h1>
+        <button @click="count += 1">
+            {{ count }}
+        </button>
+    </template>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.1/vue.js"></script><!--for dev never use the minified version, to avoid errors in dev tools-->
+    <script>
+        //create a global component ()anywhere in vue container
+        //define the template/ underlying html for component be
+        /*Vue.component('counter', {
+            template: '#counter-template',
+            //cannot do: data:{count:0} reusable component and as such we dont want
+            //components to share the same data, instead return a fucntion
+            //have to explicit about the properties a component accepts
+            //if there is a component that will only ever be used in
+            //a different component e.g a form-page, it can be nested
+            //can add a components object in the vue instance
+            props:[
+                'heading'
+            ],
+            data: function () {
+                return {count: 0};
+            }
+        })*/
+        new Vue({
+            el: '#app',
+            components: {
+                counter: {
+                    template: '#counter-template',
+                    props: [
+                        'heading'
+                    ],
+                    data: function () {
+                        return { count: 0 };
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
