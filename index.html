@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <!--Vue container, anything outside of this div vue does not know about-->
+        <div id="app">
+            <h1>{{ message }}</h1><!--reactivity/two-way binding, changing the value of message in the model instantly updates in the view-->
+            <input v-model="message"><!--creates a binding for the inputs value to a data property-->
+            <pre>
+                {{ $data | json }} <!--pass through data object and prepare it as json-->
+            </pre>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.1/vue.min.js"></script>
+        <script>
+            //no need to do old jquery stuff like $('#app h1').text('World') when some event occurs
+            /*model
+            var data = {
+                message: 'Hello World'
+            }*/
+            //Vue model that binds to the container and the model
+            new Vue({
+                el: '#app',
+                data: {
+                    message: 'Hello World'
+                }
+            });
+        </script>
+    </body>
+</html>
