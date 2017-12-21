@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <link href="main.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="app">
+            <ul>
+                <!--can pass throug an array of class names for example class="[]", literal string "''"-->
+                <li :class="{ 'completed' : task.completed }" 
+                    v-for="task in tasks"
+                    @click="task.completed = !task.completed"
+                >
+                    {{ task.body }}
+                </li>
+            </ul>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.1/vue.js"></script>
+        <script src="main.js"></script>
+    </body>
+</html>

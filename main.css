@@ -11,3 +11,6 @@ td, th {
     text-align: left;
     padding: 8px;
 }
+.completed {
+    text-decoration: line-through;
+}
