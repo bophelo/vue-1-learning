@@ -32,8 +32,11 @@
             //cannot do: data:{count:0} reusable component and as such we dont want
             //components to share the same data, instead return a fucntion
             //have to explicit about the properties a component accepts
-            //if there is a component that will only ever be used in
-            //a different component e.g a form-page, it can be nested
+            //are there situations where you dont want as component to be global:
+            //if there is a component that will only ever be used within
+            //a different component e.g a component for a page form-page,
+            //if that form page references another component that will only ever exists
+            //within that form-page, it doesnt need to be global it can be nested
             //can add a components object in the vue instance
             props:[
                 'heading'
