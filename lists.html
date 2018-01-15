@@ -13,12 +13,20 @@
         </div>
 
         <template id="tasks-template">
-            <ul>
+            <!--if all tasks are complete, do not show a number-->
+            <h1>
+                Task List 
+                <span v-show="remaining">({{ remaining }})</span>
+            </h1>
+            <ul v-show="list.length">
                 <!--can pass throug an array of class names for example class="[]", literal string "''"-->
                 <li :class="{ 'completed' : task.completed }" v-for="task in list" @click="task.completed = !task.completed">
                     {{ task.body }}
+                    <strong @click="deleteTask(task)">X</strong>
                 </li>
             </ul>
+            <p v-else>No Tasks</p>
+            <button @click="clearCompleted">Clear Completed</button>
         </template>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.1/vue.js"></script>
