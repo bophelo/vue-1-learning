@@ -14,7 +14,7 @@
         <button @click="show = ! show">Toggle</button>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.14/vue.js"></script>
         <script>
-            Vue.transition('fade', {
+            Vue.transition('fade', {//works from x.x.14
                 enterClass: 'fadeInUp',
                 leaveClass: 'fadeOutLeft'
             });
