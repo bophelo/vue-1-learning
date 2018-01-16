@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Custom Events</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div id="app">
+        <!--Situation where you need a child component to speak or send messages to a parent-->
+        <message @new-message="handlingNewMessage"><!--When a user types in a message into the component communicate that to the parent-->
+        <!--listening for when the child fires an event called new-message, on the parent we will trigger a method-->
+        </message>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.1/vue.js"></script>
+        <script>
+            Vue.component('message', {
+                template: '<input v-model="message" @keyup.enter="storeMessage">',//bind to whatever they type into as message, when user presses enter trigger function
+                data: function() {//need to return and object rather than makinf data equal to an object
+                    return {
+                        message: ''
+                    };
+                },
+                methods: {
+                    storeMessage: function() {
+                        //dispatch an event up the chain (implicit)
+                        this.$dispatch('new-message', this.message);
+                        //broadcast an event down the chain
+                        this.message = '';
+                    }
+                }
+            });
+            new Vue({
+                el: '#app',
+                data: {
+                    messages : []
+                },
+                methods: {
+                    handlingNewMessage : function(message){
+                        this.messages.push(message);
+                        console.log(this.messages);
+                    }
+                }
+            });
+        </script>
+    </div>
+</body>
+
+</html>
