@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Animations and Transitions</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <div v-show="show" class="animated" transition="fade" style="background-color: violet;">Hello World</div>
+        <button @click="show = ! show">Toggle</button>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.14/vue.js"></script>
+        <script>
+            Vue.transition('fade', {
+                enterClass: 'fadeInUp',
+                leaveClass: 'fadeOutLeft'
+            });
+            new Vue({
+                el: '#app',
+                data: {
+                    show: true
+                }
+            });
+        </script>
+    </div>
+</body>
+
+</html>
