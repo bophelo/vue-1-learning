@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Alert Component</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div id="app">
+        <alert type="success"><!--with components explicitly declare properties you are padding through-->
+            <strong>Succces!</strong> Your Account has been updated.
+        </alert>
+
+        <template id="alert-template">
+            <div :class="alertClasses" v-show="show">
+                <!--customise what gets inserted into the alert, cant hard-code because it will be different for each alert message-->
+                <slot></slot>
+                <span class="alert_close" @click="show = false">x</span>
+            </div>
+        </template>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.1/vue.js"></script>
+        <script>
+            Vue.component('alert', {
+                template: '#alert-template',
+                props: ['type'],
+                data: function() {
+                    return {
+                        show: true
+                    };
+                },
+                computed: {
+                    alertClasses: function() {
+                        var type = this.type;
+                        return {
+                            'alert': true,
+                            'alert_success': type == 'success',
+                            'alert_error': type == 'error'
+                        }
+                    }
+                }
+            });
+            new Vue({
+                el: '#app',
+            });
+        </script>
+    </div>
+</body>
+
+</html>
