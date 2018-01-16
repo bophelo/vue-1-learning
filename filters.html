@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Filters</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="person in people | role 'employee' ">
+                {{ person.name }}
+            </li>
+        </ul>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.1/vue.js"></script>
+        <script>
+            Vue.filter('role', function(value, role) {
+                return value.filter(function(item) {
+                    return item.role == role;
+                });
+            });//people | role 'admin'
+            new Vue({
+                el: '#app',
+                data: {
+                    people: [
+                        { name: 'Joe', role: 'admin'},
+                        { name: 'Jenny', role: 'manager'},
+                        { name: 'Mike', role: 'employee'},
+                        { name: 'Zoe', role: 'employee'}
+                    ]
+                }
+            });
+        </script>
+    </div>
+</body>
+
+</html>

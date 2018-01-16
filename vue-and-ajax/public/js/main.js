@@ -23,7 +23,7 @@ Vue.component('tasks', {
             //and when we have them, we assign them to the lists data property
             // GET /someUrl
             var resource = this.$resource('api/tasks/{id}');
-            resource.update().then(tasks => {
+            resource.get().then(tasks => {
             //updating a particular task = resource.update({id: 5}, {body: 'Updated Task Body'}).then(tasks => {
             //this.$http.get('api/tasks').then(tasks => {
 
