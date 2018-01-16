@@ -69,7 +69,6 @@
         <div class="flex-center position-ref full-height">
             <div class="content">
                 <tasks>
-
                 </tasks>
             </div>
         </div>
@@ -79,13 +78,14 @@
             <ul class="list-group">
                     <li class="list-group-item" v-for="task in list">
                         @{{ task.body }}
-                        <strong @click="delete(task)">X</strong>
+                        <strong @click="deleteTask(task)">X</strong>
                     </li>
             </ul>
         </template>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>do not need jquery to do jax request etc-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.1/vue.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.3.4/vue-resource.js"></script>
         <script src="/js/main.js"></script>
     </body>
 </html>
