@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div id="app">
+        <form action="index.html" @submit.prevent="handleIt"><!--event modifier-->
+
+            <button type="submit">
+                Submit Me
+            </button>
+
+        </form>
+
+        <button type="submit" @click="updateCount"><!--value of directive can be any, basic expression-->
+            Increment Counter: {{ count }}
+        </button>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.1/vue.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                count: 0
+            },
+            //any methods that you trigger on your vm need to be nested with a methods object
+            methods: {
+                handleIt: function (/*e*/) {
+                    alert('Handled');
+                    //e.preventDefault();prevent default action of submitting
+                },
+                updateCount: function () {
+                    this.count +=1;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

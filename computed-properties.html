@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+</head>
+<body>
+    <!--fine for basic inline expressions, but in this case defer to computed properties-->
+    <!--<h1>Skill: {{ points <= 100 ? 'Beginner' : 'Intermediate'  }}</h1>-->
+    <!--compute a full name-->
+    <h1>{{ fullName }}</h1>
+    <input type="text" v-model="first" placeholder="First Name">
+    <input type="text" v-model="last" placeholder="Last Name">
+    <h1>Skill: {{ skill }}</h1>
+    <input type="text" v-model="points">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.1/vue.js"></script>
+    <script>
+        new Vue({
+            el: 'body',
+            //Concept: users skill level, e.g beginner, intermediate, advanced
+            data: {
+                first: 'Mpilo',
+                last: 'Makae',
+                //What if a users skill level is dependent on experience points
+                points: 200,
+                //e.g if points are greater than a 100 then user is intermediate or whatever,
+                //as such we do not want to hardcode the level
+            },
+            computed: {
+                skill: function () {//can perform more complex logic and compare against existing data in the vm, all reactive
+                    if (this.points <= 100) {
+                        return 'Beginner';
+                    }
+                    return 'Advanced';
+                },
+                fullName: function name(params) {
+                    return this.first + ' ' + this.last;
+                }
+            }
+            /*watch: {//poormanst way of tackling it
+                first: function (first) {
+                    this.fullName = first + ' ' + this.last;
+                },
+                last: function (last) {
+                    this.fullName = this.first + ' ' + last;
+                },
+            }better to use computed properties*/
+        });
+    </script>
+</body>
+</html>

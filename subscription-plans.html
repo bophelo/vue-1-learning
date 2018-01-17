@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+</head>
+<body>
+    <div id="app">
+        <!--filter throughl list of plans and display-->
+        <!-- iterator through array with v-for-->
+        <div v-for="plan in plans">
+            <!--custom component-->
+            <!--bind a plan property to the current plan, : is vue shorthand for binding an attribute-->
+            <!--passing dow to the plan component, passing through a active property -->
+            <!--make active equal to whatever active is on the parent instance-->
+            <!--sync ensures two way sync-->
+            <plan :plan="plan" :active.sync="active" inline-template>
+                <div>
+                    <table>
+                        <tr>
+                            <th>{{ plan.name }}</th>
+                            <th>${{ plan.price }} per month</th>
+                            <th>
+                                <button @click="setActivePlan" v-show="plan.name !== active.name">
+                                    {{ isUpgrade ? 'Upgrade' : 'Downgrade' }}
+                                </button>
+                                <!--v-show is ultimately an if statement-->
+                                <button v-else>Selected</button>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+            </plan> 
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.1/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                plans: [
+                    { name: 'Enterprise', price: 100},
+                    { name: 'Professional', price: 50 },
+                    { name: 'Personal', price: 10 },
+                    { name: 'Free', price: 0 },
+                ],
+                active: {
+
+                }
+            },
+            components: {
+                plan: {
+                    props: ['plan', 'active'],//be explicit about the properties the component accepts
+                    computed: {
+                        isUpgrade : function name(params) {
+                            //compare current plans price vs active plan price
+                            //if ive selected a plan I shouldnot be able to select it again
+                            return this.plan.price > this.active.price;
+                        }
+                    },
+                    methods: {
+                        setActivePlan: function () {
+                            this.active = this.plan;
+                            //when this updates, update the parents active as well, two-way bidning via sync
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
